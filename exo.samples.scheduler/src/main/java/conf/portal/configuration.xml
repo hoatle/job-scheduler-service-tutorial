@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+  xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+
+  <component>
+    <type>org.exoplatform.services.scheduler.impl.QuartzSheduler</type>
+  </component>
+  <component>
+    <type>org.exoplatform.services.scheduler.QueueTasks</type>
+  </component>
+  <component>
+    <key>org.exoplatform.services.scheduler.JobSchedulerService</key>
+    <type>org.exoplatform.services.scheduler.impl.JobSchedulerServiceImpl</type>
+  </component>
+
+ <external-component-plugins>
+   <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+    <component-plugin>
+      <name>PeriodJob Plugin</name>
+      <set-method>addPeriodJob</set-method>
+      <type>org.exoplatform.services.scheduler.PeriodJob</type>
+      <description>period job configuration</description>
+      <init-params>
+        <properties-param>
+          <name>job.info</name>
+          <description>dumb job executed  periodically</description>
+          <property name="jobName" value="DumbJob"/>
+          <property name="groupName" value="DumbJobGroup"/>
+          <property name="job" value="org.exoplatform.samples.scheduler.jobs.DumbJob"/>
+          <property name="repeatCount" value="0"/>
+          <property name="period" value="60000"/>
+          <property name="startTime" value="+45"/>
+          <property name="endTime" value=""/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
+ </external-component-plugins>
+</configuration>
